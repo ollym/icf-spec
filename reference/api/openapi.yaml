@@ -202,57 +202,39 @@ paths:
       responses: {}
       description: >-
         This endpoint will confirm the booking with the supplier.
-
-
-
-
-
+        
+        
         This endpoint can only be called on bookings with a status of `onHold`
         and before the value of `utcHoldExpiration` has elapsed.
-
-
-
-
-
+        
+        
         After calling this endpoint the booking status will either change to
         `confirmed` if the booking was accepted, or `pending` if the supplier
         must still confirm the booking.
-
-
-
-
-
+        
+        
         If `pending` the `utcPendingExpiration` value will be set, indicating the
         maximum time the customer must wait before the booking will be either
         confirmed or rejected. This isn't a strict deadline, but useful to
         indicate to the customer how long they should expect to wait for their
         tickets. To check if the booking is confirmed/rejected you should poll
         the GET /bookings/{uuid} endpoint periodically for status changes.
-
-
-
-
-
+        
+        
         It is not possible to reject a booking immediately from this endpoint, it
         must first go into a `pending` status. The only possible commit workflows
         are:
-
-
-
-
-
+        
+        
         - `onHold` -> `expired`
-
+        
         - `onHold` -> `confirmed`
-
+        
         - `onHold` -> `pending` -> `confirmed`
-
+        
         - `onHold` -> `pending` -> `rejected`
-
-
-
-
-
+        
+        
         So the booking `status` parameter returned from this endpoint can only be
         either `confirmed` or `pending`.
       security:
