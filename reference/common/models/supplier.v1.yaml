@@ -1,0 +1,11 @@
+title: Supplier
+type: object
+x-examples: {}
+description: A parent company that sells products
+properties:
+  id:
+    type: string
+    example: '0001'
+  name:
+    type: string
+    example: Walt Disney Attractions

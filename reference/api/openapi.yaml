@@ -1,0 +1,275 @@
+openapi: 3.0.0
+info:
+  title: Booking API
+  version: '1.0'
+  contact:
+    name: Oliver Morgan
+    email: ollym@me.com
+  description: 'This is an industry-led API standard for the booking of attractions, tours and activities.'
+servers:
+  - url: 'https://api.example-icf-supplier.com'
+    description: Supplier Endpoint
+paths:
+  /suppliers:
+    get:
+      summary: List all suppliers
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../common/models/supplier.v1.yaml
+      description: Lists all product suppliers
+      security:
+        - API Key: []
+      requestBody: {}
+    parameters: []
+  /products:
+    get:
+      summary: List all supplier products
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../common/models/product.v1.yaml
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: supplierId
+          description: The supplier ID
+          required: true
+      description: Get a list of products
+    parameters: []
+  /availabilityOverview:
+    parameters: []
+    get:
+      summary: Get availability overview
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    localDate:
+                      type: string
+                      format: date
+                    localStartTime:
+                      type: string
+                      format: time
+                    localEndTime:
+                      type: string
+                      format: time
+                    status:
+                      type: string
+                      enum:
+                        - available
+                        - soldOut
+                        - closed
+                  required:
+                    - localDate
+                    - localStartTime
+                    - localEndTime
+                    - status
+      description: ''
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: localDateStart
+          required: true
+          description: When to start the availability check
+        - schema:
+            type: string
+          in: query
+          name: localDateEnd
+          required: true
+          description: When to end the availability check
+      requestBody: {}
+      security:
+        - API Key: []
+  /availabilityCheck:
+    parameters: []
+    post:
+      summary: Run an availability check
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  localDate:
+                    type: string
+                    format: date
+                    example: '2020-01-01'
+                    description: ''
+                  localTime:
+                    type: string
+                    format: date
+                    example: '2020-01-31'
+                  capacity:
+                    type: integer
+                  vacancies:
+                    type: integer
+      security:
+        - API Key: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                localDate:
+                  type: string
+                  format: date
+                localTime:
+                  type: string
+                  format: time
+                units:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      quantity:
+                        type: integer
+                        minimum: 1
+                    required:
+                      - id
+                      - quantity
+              required:
+                - localDate
+                - localTime
+                - units
+      description: ''
+  /bookings:
+    parameters: []
+    post:
+      summary: Create booking
+      tags: []
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+      description: 'This endpoints reserves a number of tickets for the customer. You can set the `utcHoldExpiration` parameter to indicate how long you want to reserve the tickets for. This can be useful if this booking is part of a chain of other bookings that need to be made, or the customer needs to complete payment.'
+      security:
+        - API Key: []
+  '/bookings/{uuid}':
+    delete:
+      summary: Cancel booking reservation
+      tags: []
+      responses: {}
+      description: 'Do not confuse this enpoint with a cancellation. You can only call this endpoint on bookings with a status of "onHold" '
+      security:
+        - API Key: []
+    parameters:
+      - schema:
+          type: string
+        name: uuid
+        in: path
+        required: true
+  '/bookings/{uuid}/commit':
+    parameters:
+      - schema:
+          type: string
+        name: uuid
+        in: path
+        required: true
+    post:
+      summary: Commit to making the booking
+      responses: {}
+      description: >-
+        This endpoint will confirm the booking with the supplier.
+
+
+
+
+
+        This endpoint can only be called on bookings with a status of `onHold`
+        and before the value of `utcHoldExpiration` has elapsed.
+
+
+
+
+
+        After calling this endpoint the booking status will either change to
+        `confirmed` if the booking was accepted, or `pending` if the supplier
+        must still confirm the booking.
+
+
+
+
+
+        If `pending` the `utcPendingExpiration` value will be set, indicating the
+        maximum time the customer must wait before the booking will be either
+        confirmed or rejected. This isn't a strict deadline, but useful to
+        indicate to the customer how long they should expect to wait for their
+        tickets. To check if the booking is confirmed/rejected you should poll
+        the GET /bookings/{uuid} endpoint periodically for status changes.
+
+
+
+
+
+        It is not possible to reject a booking immediately from this endpoint, it
+        must first go into a `pending` status. The only possible commit workflows
+        are:
+
+
+
+
+
+        - `onHold` -> `expired`
+
+        - `onHold` -> `confirmed`
+
+        - `onHold` -> `pending` -> `confirmed`
+
+        - `onHold` -> `pending` -> `rejected`
+
+
+
+
+
+        So the booking `status` parameter returned from this endpoint can only be
+        either `confirmed` or `pending`.
+      security:
+        - API Key: []
+  '/bookings/{uuid}/extend':
+    parameters:
+      - type: string
+        name: uuid
+        in: path
+        required: true
+    post:
+      summary: Extend the booking hold
+      responses: {}
+components:
+  schemas: {}
+  securitySchemes:
+    API Key:
+      type: http
+      scheme: Basic
+      description: ''

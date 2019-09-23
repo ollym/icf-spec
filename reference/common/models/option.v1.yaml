@@ -1,0 +1,20 @@
+title: Option
+type: object
+properties:
+  id:
+    type: string
+    example: 0001-0001
+  name:
+    type: string
+    example: Morning
+  description:
+    type: string
+    example: XXXX
+  reference:
+    type: string
+    example: LR1-01
+  units:
+    type: array
+    uniqueItems: true
+    items:
+      $ref: ./unit.v1.yaml

@@ -1,0 +1,180 @@
+title: Booking
+type: object
+description: ''
+properties:
+  uuid:
+    type: string
+    format: uuid
+    example: 01437844-4442-4185-a245-074f9227494c
+    description: A fixed unique id that never changes throughout the lifecycle of the booking.
+  resellerReference:
+    type:
+      - string
+      - 'null'
+    description: An optional human-readable reference supplied by the reseller who made the booking
+  supplierReference:
+    type:
+      - string
+      - 'null'
+    description: An optional human-readable reference returned by the supplier when the booking is created
+  status:
+    type: string
+    description: >-
+      The current status of the booking.
+
+
+
+
+
+
+
+
+
+      **onHold** the initial state of a booking.
+
+      **expired** when an onHold booking expires without being confirmed.
+
+      **pending** when a booking is committed but is still waiting for final
+      confirmation from the supplier.
+
+      **confirmed** when the booking is confirmed by the supplier, and the
+      tickets are usable.
+
+      **rejected** only when the booking was "pending" and the supplier could not
+      confirm the booking. In this case a rejectedReason message may be given.
+
+      **cancelled** After a booking is confirmed, and then later cancelled.
+    enum:
+      - onHold
+      - pending
+      - cancelled
+      - expired
+      - confirmed
+      - rejected
+  supplierId:
+    type: string
+    description: The supplier ID
+  productId:
+    type: string
+    description: The product ID
+  optionId:
+    type: string
+    description: The option ID
+  localDate:
+    type: string
+    description: The local date in format YYYY-MM-DD returned from either the /availabilityOverview or /availabilityCheck endpoints
+    format: date
+    example: 2019
+  localTime:
+    type:
+      - string
+      - 'null'
+    format: time
+    description: 'The selected start time given as HH:MM:SS if any, selected frm the /availabilityOviewview or /availabilityCheck endpoints'
+  confirmedAt:
+    type: string
+    description: The exact date and time the booking was confirmed in UTC format
+    format: date-time
+    example: '2019-01-01T10:00:00Z'
+  barcode:
+    type:
+      - string
+      - 'null'
+    description: "The barcode to be printed on the ticket. If this is null it's possible the barcodes were provided per-ticket instead"
+    example: 1234567890123
+  barcodeSymbology:
+    type: string
+    enum:
+      - qrcode
+      - aztec
+      - code128
+      - code39
+    description: The barcode symbology to be used on the voucher
+  utcHoldExpiration:
+    type: string
+    format: date-time
+    example: '2019-01-01T10:00:00Z'
+  contact:
+    type: object
+    description: Contact information for the lead traveller
+    additionalProperties: false
+    required:
+      - fullName
+      - emailAddress
+      - phoneNumber
+    properties:
+      fullName:
+        type:
+          - string
+          - 'null'
+        description: The full name
+      emailAddress:
+        type:
+          - string
+          - 'null'
+        description: Contact email address
+        format: email
+      phoneNumber:
+        type:
+          - string
+          - 'null'
+        description: Contact phone number
+  units:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unit ID
+        quantity:
+          type: integer
+          description: The quantity of tickets required for that unit
+          minimum: 1
+      required:
+        - id
+        - quantity
+  tickets:
+    type: array
+    description: For each requested unit there must be a corresponding ticket object in the array
+    minItems: 1
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        reference:
+          type: string
+        redeemedAt:
+          type: string
+        unitType:
+          type: string
+        unitId:
+          type: string
+        barcode:
+          type: string
+      required:
+        - id
+        - reference
+        - redeemedAt
+        - unitType
+        - unitId
+        - barcode
+required:
+  - uuid
+  - resellerReference
+  - supplierReference
+  - status
+  - supplierId
+  - productId
+  - optionId
+  - localDate
+  - localTime
+  - confirmedAt
+  - barcode
+  - barcodeSymbology
+  - utcHoldExpiration
+  - contact
+  - units
+  - tickets

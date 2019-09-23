@@ -1,0 +1,10 @@
+title: Capability
+type: object
+properties:
+  id:
+    type: string
+  revision:
+    type: integer
+  required:
+    type: boolean
+description: ''

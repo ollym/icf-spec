@@ -1,0 +1,47 @@
+title: Unit
+type: object
+properties:
+  id:
+    type: string
+    example: 0001-0001-adult
+  reference:
+    type: string
+    example: LR1-01-01
+  type:
+    type: string
+    enum:
+      - adult
+      - child
+      - infant
+      - youth
+      - student
+      - senior
+      - traveller
+    example: adult
+  name:
+    type: string
+    example: Adult
+  description:
+    type:
+      - string
+      - 'null'
+    example: XXXX
+  restrictions:
+    type: object
+    additionalProperties: false
+    properties:
+      minAge:
+        type: integer
+        default: 0
+        example: 9
+        minimum: 0
+      maxAge:
+        type: integer
+        default: 999
+        example: 12
+        minimum: 0
+      idRequired:
+        type: boolean
+        default: false
+        example: true
+x-examples: {}
