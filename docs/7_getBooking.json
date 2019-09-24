@@ -1,0 +1,69 @@
+GET /suppliers/:id/bookings/:uuid
+
+{
+  "uuid": "xxxx-yyyy-zzzzzzzzz-xxxxxx",
+  "resellerReference": "001-002-003",
+  "supplierReference": "ABC-123",
+  "bookingStatus": "Confirmed", (ENUM "OnHold", "Pending", "Confirmed", "Expired")
+  "cancellationRequest": {
+    "reason": "Fraud",
+    "override": true,
+    "status": null (ENUM "Pending", "Approved", "Rejected", "ApprovedWithoutRefund"),
+    "requestedAt": "2019-01-01T10:00:00Z",
+    "resolvedAt": "2019-01-01T10:00:00Z"
+  },
+  "cancellationRequestStatus": "NotAllowed", (ENUM "Allowed", "ReviewRequired", "NotAllowed"),
+  "productId": "0001",
+  "optionId": "0002",
+  "localDate": "2019-01-01",
+  "localTime": "10:30:00",
+  "confirmedAt": "2019-01-01T10:00:00Z",
+  "barcode": "01234567890123",
+  "barcodeSymbology": "QRCode", (ENUM QRCode Aztec Code128 Code39)
+  "contact": {
+    "fullName": null,
+    "emailAddress": null,
+    "phoneNumber": null
+  },
+  "units": [
+    {
+      "id": "0001",
+      "quantity": 3
+    },
+    {
+      "id": "0002",
+      "quantity": 2
+    }
+  ],
+  "tickets": [
+    {
+      "id": "xxxx",
+      "reference": "ABC-123-001",
+      "issuedAt": "2019-01-01T10:00:00Z", ??
+      "redeemedAt": "2019-01-01T10:00:00Z",
+      "unitType": "adult",
+      "unitId": "0001",
+      "barcode": "01234567890123"
+    },
+    {
+      "id": "xxxx",
+      "reference": "ABC-123-002",
+      "issuedAt": "2019-01-01T10:00:00Z",
+      "redeemedAt": "2019-01-01T10:00:00Z",
+      "status": "confirmed",
+      "unitType": "adult",
+      "unitId": "0001",
+      "barcode": "01234567890123"
+    },
+    {
+      "id": "xxxx",
+      "reference": "ABC-123-003",
+      "issuedAt": "2019-01-01T10:00:00Z",
+      "redeemedAt": null,
+      "status": "confirmed",
+      "unitType": "child",
+      "unitId": "0002",
+      "barcode": "01234567890123"
+    }
+  ]
+}

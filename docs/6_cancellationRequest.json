@@ -1,0 +1,10 @@
+POST /suppliers/:id/bookings/:uuid/cancellationRequest
+
+{
+  "reason": "Fraud", (ENUM "Fraud", "CustomerRequested")
+  "override": true
+}
+
+RESPONSE
+
+:booking-object:
