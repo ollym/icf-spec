@@ -1,4 +1,4 @@
-POST /expireBooking?supplierId=X
+POST /expireReservation?supplierId=X
 
 REQUEST:
 

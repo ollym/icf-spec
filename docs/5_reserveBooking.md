@@ -1,4 +1,4 @@
-POST /reserveBooking?supplierId=X
+POST /createReservation?supplierId=X
 
 - Request with a duplicate uuid should respond with the same original response.
 - The request body should not change between requests with the same uuid.
@@ -9,18 +9,25 @@ REQUEST BODY:
 
 ```json
 {
-  "uuid": "xxxx-yyyy-zzzzzzzzz-xxxxxx", # (required)
+  "uuid": "xxxx-yyyy-zzzzzzzzz-xxxxxx", # (required)  
   "productId": "Y", # (required)
   "optionId": "Z", # (required)
   "availabilityId": "xxx", # (required)
-  "units": [
+  "unitItems": [ # (required)
     {
-      "id": "0001",
-      "quantity": 3
+      "uuid": "xxxx-yyyy-zzzzzzzzz-xxxxxx", # (required)
+      "resellerReference": "001-002-003",
+      "unitId": "0001", # (required)
     },
     {
-      "id": "0002",
-      "quantity": 2
+      "uuid": "xxxx-yyyy-zzzzzzzzz-xxxxxx", # (required)
+      "resellerReference": "001-002-003",
+      "unitId": "0001", # (required)
+    },
+    {
+      "uuid": "xxxx-yyyy-zzzzzzzzz-xxxxxx", # (required)
+      "resellerReference": "001-002-003",
+      "unitId": "0002", # (required)
     }
   ],
   "holdExpirationMinutes": 360
@@ -43,25 +50,50 @@ RESPONSE:
     "localEndDateTime": "2019-01-01T13:30:00", # (required)
   },
   "confirmedAt": null,
-  "barcode": null,
-  "barcodeSymbology": "QRCode", # (required) (ENUM QRCode Aztec Code128 Code39)
-  "ticketsPdfUrl": null,
   "utcHoldExpiration": "2019-01-01T10:00:00Z", # (required)
   "contact": { # (required)
     "fullName": null,
     "emailAddress": null,
     "phoneNumber": null
   },
-  "units": [ # (required)
+  
+  "ticket": {
+    "barcode": null,
+    "barcodeSymbology": "QRCode", # (required) (ENUM QRCode Aztec Code128 Code39)
+    "ticketsPdfUrl": null,
+  },
+  
+  "unitItems": [ # (required)
     {
-      "id": "0001", # (required)
-      "quantity": 3 # (required)
+      "uuid": "xxxx-yyyy-zzzzzzzzz-xxxxxx", # (required)
+      "resellerReference": "001-002-003",
+      "unitId": "0001", # (required)
+      "ticket": {
+        "barcode": null,
+        "barcodeSymbology": "QRCode", # (required) (ENUM QRCode Aztec Code128 Code39)
+        "ticketsPdfUrl": null
+      }
     },
     {
-      "id": "0002", # (required)
-      "quantity": 2 # (required)
+      "uuid": "xxxx-yyyy-zzzzzzzzz-xxxxxx", # (required)
+      "resellerReference": "001-002-003",
+      "unitId": "0001", # (required)
+      "ticket": {
+        "barcode": null,
+        "barcodeSymbology": "QRCode", # (required) (ENUM QRCode Aztec Code128 Code39)
+        "ticketsPdfUrl": null
+      }
+    },
+    {
+      "uuid": "xxxx-yyyy-zzzzzzzzz-xxxxxx", # (required)
+      "resellerReference": "001-002-003",
+      "unitId": "0002", # (required)
+      "ticket": {
+        "barcode": null,
+        "barcodeSymbology": "QRCode", # (required) (ENUM QRCode Aztec Code128 Code39)
+        "ticketsPdfUrl": null
+      }
     }
-  ],
-  "tickets": [ ]
+  ]
 }
 ```

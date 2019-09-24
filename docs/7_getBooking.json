@@ -1,69 +1,53 @@
-GET /suppliers/:id/bookings/:uuid
+GET /getBooking?uuid=
 
+```json
 {
-  "uuid": "xxxx-yyyy-zzzzzzzzz-xxxxxx",
+  "uuid": "xxxx-yyyy-zzzzzzzzz-xxxxxx", # (required)
   "resellerReference": "001-002-003",
   "supplierReference": "ABC-123",
-  "bookingStatus": "Confirmed", (ENUM "OnHold", "Pending", "Confirmed", "Expired")
-  "cancellationRequest": {
-    "reason": "Fraud",
-    "override": true,
-    "status": null (ENUM "Pending", "Approved", "Rejected", "ApprovedWithoutRefund"),
-    "requestedAt": "2019-01-01T10:00:00Z",
-    "resolvedAt": "2019-01-01T10:00:00Z"
+  "status": "CONFIRMED", # (required) (ENUM "ON_HOLD", "PENDING", "CONFIRMED", "CANCELLED", "EXPIRED")
+  "utcDeliveredAt": "2019-01-01T11:30:00Z",
+  "utcConfirmedAt": null,
+  "cancellationRequest": null,
+  "refreshFrequency": "HOURLY", # ENUM ("HOURLY", "DAILY")
+  "productId": "0001", # (required)
+  "optionId": "0002", # (required)
+  "availability": { # (required)
+    "id": "0003", # (required)
+    "localStartDateTime": "2019-01-01T11:30:00", # (required)
+    "localEndDateTime": "2019-01-01T13:30:00", # (required)
   },
-  "cancellationRequestStatus": "NotAllowed", (ENUM "Allowed", "ReviewRequired", "NotAllowed"),
-  "productId": "0001",
-  "optionId": "0002",
-  "localDate": "2019-01-01",
-  "localTime": "10:30:00",
-  "confirmedAt": "2019-01-01T10:00:00Z",
-  "barcode": "01234567890123",
-  "barcodeSymbology": "QRCode", (ENUM QRCode Aztec Code128 Code39)
-  "contact": {
-    "fullName": null,
-    "emailAddress": null,
-    "phoneNumber": null
+  "deliveryMethods": [ "TICKET", "VOUCHER" ], # (required) ENUM("TICKET", "VOUCHER")
+  "voucher": {
+    "deliveryFormat": "QRCODE", # (required, can be empty)
+    "redemptionMethod": "DIGITAL", # ENUM("MANIFEST", "DIGITAL", "PRINT") (required)
+    "utcRedeemedAt": "2019-01-01T11:30:00Z",
+    "utcDeliveredAt": "2019-01-01T11:30:00Z",
+    "deliveryValue": "04728937123",
   },
-  "units": [
+  "unitItems": [ # (required)
     {
-      "id": "0001",
-      "quantity": 3
-    },
-    {
-      "id": "0002",
-      "quantity": 2
+      "uuid": "...."
+      "resellerReference": "001-002-003",
+      "supplierReference": "ABC-123",
+      "unitId": "0001",
+      
+      "ticket": {
+        "deliveryFormat": "PDF_URL", # (required)
+        "redemptionMethod": "DIGITAL", # ENUM("MANIFEST", "DIGITAL", "PRINT") (required)
+        "utcRedeemedAt": "2019-01-01T11:30:00Z",
+        "utcDeliveredAt": "2019-01-01T11:30:00Z",
+        "deliveryValue": "https://some-url/ticket.pdf",
+      }
     }
   ],
-  "tickets": [
-    {
-      "id": "xxxx",
-      "reference": "ABC-123-001",
-      "issuedAt": "2019-01-01T10:00:00Z", ??
-      "redeemedAt": "2019-01-01T10:00:00Z",
-      "unitType": "adult",
-      "unitId": "0001",
-      "barcode": "01234567890123"
-    },
-    {
-      "id": "xxxx",
-      "reference": "ABC-123-002",
-      "issuedAt": "2019-01-01T10:00:00Z",
-      "redeemedAt": "2019-01-01T10:00:00Z",
-      "status": "confirmed",
-      "unitType": "adult",
-      "unitId": "0001",
-      "barcode": "01234567890123"
-    },
-    {
-      "id": "xxxx",
-      "reference": "ABC-123-003",
-      "issuedAt": "2019-01-01T10:00:00Z",
-      "redeemedAt": null,
-      "status": "confirmed",
-      "unitType": "child",
-      "unitId": "0002",
-      "barcode": "01234567890123"
-    }
-  ]
+  "utcHoldExpiration": null,
+  "contact": { # (required)
+    "fullName": "Oliver Morgan",
+    "emailAddress": "ollym@me.com",
+    "phoneNumber": "07840 739436",
+    "locales": [ "en-GB", "en-US", "en" ],
+    "country": "GB"
+  }
 }
+```

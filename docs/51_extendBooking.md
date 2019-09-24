@@ -1,11 +1,10 @@
-POST /extendBooking?supplierId=X
-
-
+POST /extendReservation?supplierId=X
 
 ```json
 {
   "uuid": "xxxxxxxxxxx",
-  "reason": "Fraud Check",
+  "reason": "FRAUD_CHECK", # (required) (ENUM "FRAUD_CHECK", "CUSTOMER_REQUESTED", "OTHER")
+  "reasonDetails": null,
   "holdExpirationMinutes": 300
 }
 ```

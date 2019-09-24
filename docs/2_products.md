@@ -4,12 +4,16 @@ GET /products?supplierId=X
 [
   {
     "id": "0001", # unique to supplier (required) (unique to supplier)
-    "name": "Museum Tour With Lunch And Something", # (required)
+    "internalName": "Museum Tour With Lunch And Something", # (required)
     "reference": "LR1",
-    "description": "XXXX",
     "locale": "en", # (required)
     "timeZone": "Europe/London", # (required)
+    "instantConfirmation": true, # (required)
+    "instantDelivery": true, # (required)
     "availabilityType": "START_TIME", # ENUM("START_TIME", "OPENING_HOURS") (required)
+    "deliveryFormats": [ "QRCODE", "AZTEC", "PDF_URL" ], # ENUM( "PDF_URL", "QRCODE", "AZTEC", "CODE128", "CODE39"),
+    "deliveryMethods": [ "VOUCHER" ], # ENUM( "TICKET", "VOUCHER" )
+    "redemptionMethod": "DIGITAL" # ENUM("MANIFEST", "DIGITAL", "PRINT") (required)
     "capabilities": [
       {
         "id": "dynamic-pricing",
@@ -25,45 +29,39 @@ GET /products?supplierId=X
     "options": [ # (at least one required)
       {
         "id": "0001", # (required) (unique to product)
-        "name": "Morning", # (required)
+        "internalName": "Morning", # (required)
         "reference": "LR1-01",
-        "description": "XXXX",
         "units": [ # (at least one required)
           {
             "id": "adult", # (required) (unique to option)
-            "name": "Adult", # (required)
+            "internalName": "Adult", # (required)
             "reference": "LR1-01-01",
-            "description": "XXXX",
-            "type": "adult", (ENUM adult, child, infant, youth, student, senior, traveller, resource, other) (traveller can only be used in replacement of adult, child, infant, youth, student, senior) (required)
+            "type": "adult" (ENUM adult, child, infant, youth, student, senior, traveller, resource, other) (traveller can only be used in replacement of adult, child, infant, youth, student, senior) (required)
           },
           {
             "id": "0001-0001-child",
+            "internalName": "Child",
             "reference": "LR1-01-01",
-            "type": "child",
-            "name": "Child",
-            "description": "XXXX"
+            "type": "child"
           }
         ]
       },
       {
         "id": "0001-0002",
-        "name": "Afternoon",
-        "description": "XXXX",
+        "internalName": "Afternoon",
         "reference": "LR1-02",
         "units": [
           {
             "id": "0001-0002-adult",
+            "internalName": "Adult",
             "reference": "LR1-01-01",
-            "type": "adult",
-            "name": "Adult",
-            "description": "XXXX"
+            "type": "adult"
           },
           {
             "id": "0001-0002-child",
+            "internalName": "Child",
             "reference": "LR1-01-01",
-            "type": "child",
-            "name": "Child",
-            "description": "XXXX"
+            "type": "child"
           }
         ]
       }
