@@ -1,4 +1,4 @@
-GET /getBooking?uuid=
+GET /getBooking?supplierId=X&uuid=Y
 
 ```json
 {
@@ -8,7 +8,14 @@ GET /getBooking?uuid=
   "status": "CONFIRMED", # (required) (ENUM "ON_HOLD", "PENDING", "CONFIRMED", "CANCELLED", "EXPIRED")
   "utcDeliveredAt": "2019-01-01T11:30:00Z",
   "utcConfirmedAt": null,
-  "cancellationRequest": null,
+  "cancellationRequest": {
+    "reason": "FRAUD",
+    "reasonDetails": null,
+    "status": null # (required) (ENUM "PENDING", "CONFIRMED", "REJECTED"),
+    "refundStatus": "NONE", # (required) (ENUM "FULL", "PARTIAL", "NONE"),
+    "utcRequestedAt": "2019-01-01T10:00:00Z",
+    "utcResolvedAt": "2019-01-01T10:00:00Z"
+  },
   "refreshFrequency": "HOURLY", # ENUM ("HOURLY", "DAILY")
   "productId": "0001", # (required)
   "optionId": "0002", # (required)
@@ -27,7 +34,7 @@ GET /getBooking?uuid=
   },
   "unitItems": [ # (required)
     {
-      "uuid": "...."
+      "uuid": "....", # (required)
       "resellerReference": "001-002-003",
       "supplierReference": "ABC-123",
       "unitId": "0001",
