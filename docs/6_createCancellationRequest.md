@@ -1,3 +1,5 @@
+Cannot change refund from full to none after confirmCancellationRequest
+
 POST /createCancellationRequest?supplierId=X
 
 ```json
@@ -17,11 +19,11 @@ POST /createCancellationRequest?supplierId=X
     "reason": "FRAUD",
     "reasonDetails": null,
     "status": "ON_HOLD", # (required) (ENUM "ON_HOLD")
-    "refundable": "FULL", # (required) (ENUM "FULL", "NONE",
-    "confirmedAt": null,
+    "refund": "FULL", # (required) (ENUM "FULL", "NONE",
     "timeToResolutionSeconds": 0,
     "utcRequestedAt": "2019-01-01T10:00:00Z",
-    "utcResolvedAt": "2019-01-01T10:00:00Z",
+    "utcConfirmedAt": null,
+    "utcResolvedAt": null,
     "utcHoldExpiration": "2019-01-01T10:00:00Z", # (required)
   }
 }

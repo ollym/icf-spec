@@ -11,10 +11,13 @@ GET /getBooking?supplierId=X&uuid=Y
   "cancellationRequest": {
     "reason": "FRAUD",
     "reasonDetails": null,
-    "status": null # (required) (ENUM "PENDING", "CONFIRMED", "REJECTED"),
-    "refundStatus": "NONE", # (required) (ENUM "FULL", "PARTIAL", "NONE"),
+    "status": "ON_HOLD", # (required) (ENUM "ON_HOLD")
+    "refund": "FULL", # (required) (ENUM "FULL", "NONE",
+    "timeToResolutionSeconds": 0,
     "utcRequestedAt": "2019-01-01T10:00:00Z",
-    "utcResolvedAt": "2019-01-01T10:00:00Z"
+    "utcConfirmedAt": null,
+    "utcResolvedAt": null,
+    "utcHoldExpiration": "2019-01-01T10:00:00Z", # (required)
   },
   "refreshFrequency": "HOURLY", # ENUM ("HOURLY", "DAILY")
   "productId": "0001", # (required)
