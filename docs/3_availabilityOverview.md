@@ -22,12 +22,14 @@ CLOSED = Blocked out, and not available for sale (refresh every 12hrs)
     "localStartDateTime": "2019-01-01T11:30:00", # (required)
     "localEndDateTime": "2019-01-01T13:30:00", # (required)
     "status": "AVAILABLE", ENUM("FREESALE", "AVAILABLE", "LIMITED", "SOLD_OUT", "CLOSED") # (required)
+    "vacancies": 100
   },
   {
     "id": "xxxxxxxxxxxxxxxxxxxx",
     "localStartDateTime": "2019-01-01T11:30:00", # (required)
     "localEndDateTime": "2019-01-01T13:30:00", # (required)
-    "status": "AVAILABLE" ENUM("FREESALE", "AVAILABLE", "LIMITED", "SOLD_OUT", "CLOSED") # (required)
+    "status": "AVAILABLE", ENUM("FREESALE", "AVAILABLE", "LIMITED", "SOLD_OUT", "CLOSED") # (required)
+    "vacancies": null
   }
 ]
 ```
