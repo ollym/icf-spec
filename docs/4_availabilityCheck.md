@@ -29,12 +29,14 @@ RESPONSE
     "localStartDateTime": "2019-01-01T11:30:00", # (required)
     "localEndDateTime": "2019-01-01T13:30:00", # (required)
     "status": "AVAILABLE", ENUM("FREESALE", "AVAILABLE", "LIMITED", "SOLD_OUT", "CLOSED") # (required)
+    "vacancies": 100
   },
   {
     "id": "yyy",
     "localStartDateTime": "2019-01-01T14:30:00", # (required)
     "localEndDateTime": "2019-01-01T18:30:00", # (required)
     "status": "AVAILABLE", ENUM("FREESALE", "AVAILABLE", "LIMITED", "SOLD_OUT", "CLOSED") # (required)
+    "vacancies": null
   }
 ]
 ```
