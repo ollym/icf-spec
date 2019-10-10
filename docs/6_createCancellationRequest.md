@@ -8,7 +8,7 @@ POST /createCancellationRequest?supplierId=X
 }
 ```
 
-RESPONSE
+200 OK RESPONSE
 
 ```json
 {
@@ -16,10 +16,13 @@ RESPONSE
   "cancellationRequest": {
     "reason": "FRAUD",
     "reasonDetails": null,
-    "status": null # (required) (ENUM "PENDING", "CONFIRMED", "REJECTED"),
-    "refundStatus": "NONE", # (required) (ENUM "FULL", "PARTIAL", "NONE"),
+    "status": "ON_HOLD", # (required) (ENUM "ON_HOLD")
+    "refundable": "FULL", # (required) (ENUM "FULL", "NONE",
+    "confirmedAt": null,
+    "timeToResolutionSeconds": 0,
     "utcRequestedAt": "2019-01-01T10:00:00Z",
-    "utcResolvedAt": "2019-01-01T10:00:00Z"
+    "utcResolvedAt": "2019-01-01T10:00:00Z",
+    "utcHoldExpiration": "2019-01-01T10:00:00Z", # (required)
   }
 }
 ```

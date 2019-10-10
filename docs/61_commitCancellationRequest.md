@@ -1,4 +1,4 @@
-POST /createCancellationRequest?supplierId=X
+POST /commitCancellationRequest?supplierId=X
 
 ```json
 {
@@ -16,7 +16,7 @@ RESPONSE
   "cancellationRequest": {
     "reason": "FRAUD",
     "reasonDetails": null,
-    "status": null # (required) (ENUM "PENDING", "CONFIRMED", "REJECTED"),
+    "status": null # (required) (ENUM "PENDING", "CONFIRMED", "REJECTED", "EXPIRED"),
     "refundStatus": "NONE", # (required) (ENUM "FULL", "PARTIAL", "NONE"),
     "utcRequestedAt": "2019-01-01T10:00:00Z",
     "utcResolvedAt": "2019-01-01T10:00:00Z"

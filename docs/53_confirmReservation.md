@@ -1,4 +1,4 @@
-POST /commitReservation?supplierId=X
+POST /confirmReservation?supplierId=X
 
 ```json
 {
