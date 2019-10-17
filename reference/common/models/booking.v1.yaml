@@ -22,14 +22,6 @@ properties:
     description: >-
       The current status of the booking.
 
-
-
-
-
-
-
-
-
       **onHold** the initial state of a booking.
 
       **expired** when an onHold booking expires without being confirmed.
