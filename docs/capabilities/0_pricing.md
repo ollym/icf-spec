@@ -104,7 +104,7 @@ RESPONSE
       "net": "10.00"
     },
     "breakdown": [
-      { "name": "CA Sales Tax (8%)", "value": "10.00", "type": "tax" },
+      { "name": "CA Sales Tax (8%)", "value": "10.00", "type": "tax" }, # type = ENUM(tax, fee)
       { "name": "Fuel Surcharge", "value": "5.00", "type": "fee" },
       { "name": "Handling Fee", "value": "3.25", "type": "fee" }
     ],
@@ -135,7 +135,7 @@ RESPONSE
       "net": "10.00"
     },
     "breakdown": [
-      { "name": "CA Sales Tax (8%)", "value": "10.00", "type": "tax" },
+      { "name": "CA Sales Tax (8%)", "value": "10.00", "type": "tax" }, # type = ENUM(tax, fee)
       { "name": "Fuel Surcharge", "value": "5.00", "type": "fee" },
       { "name": "Handling Fee", "value": "3.25", "type": "fee" }
     ],
