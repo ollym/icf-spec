@@ -3,6 +3,94 @@ GET /products?supplierId=X
 ```json
 [
   {
+    "id": "0001",
+    "internalName": "Morning tour",
+    "reference": "LR1-01",
+    "locale": "en-GB",
+    "timeZone": "Europe/London",
+    "instantConfirmation": true,
+    "instantDelivery": true,
+    "availabilityType": "START_TIME",
+    "deliveryFormats": [
+      "PDF_URL",
+      "CODE39"
+    ],
+    "deliveryMethods": [
+      "TICKET",
+      "VOUCHER"
+    ],
+    "redemptionMethod": "DIGITAL",
+    "capabilities": [
+      {
+        "id": "expedia/dynamic-pricing",
+        "homepage": "https://icf.org/docs/dynamic-pricing",
+        "revision": [ 2, 1, 3 ],
+        "required": true,
+        "data": {}
+      },
+      {
+        "id": "icf/dynamic-pricing",
+        "homepage": "https://icf.org/docs/dynamic-pricing",
+        "revision": [ 2, 1, 3 ],
+        "required": true,
+        "data": {}
+      },
+      {
+        "id": "peek/dynamic-pricing",
+        "homepage": "https://api.my-booking-platform.com/dynamic-pricing",
+        "revision": [ 2 ],
+        "required": false,
+        "data": {}
+      }
+    ],
+    "options": [
+      {
+        "id": "0001",
+        "internalName": "Morning",
+        "reference": "LR1-01",
+        "units": [
+          {
+            "id": "adult",
+            "internalName": "Adult",
+            "reference": "LR1-01-01",
+            "type": "ADULT"
+          },
+          {
+            "id": "0001-0001-child",
+            "internalName": "Child",
+            "reference": "LR1-01-02",
+            "type": "CHILD"
+          }
+        ]
+      },
+      {
+        "id": "0002",
+        "internalName": "Afternoon",
+        "reference": "LR1-02",
+        "units": [
+          {
+            "id": "adult",
+            "internalName": "Adult",
+            "reference": "LR1-01-01",
+            "type": "ADULT"
+          },
+          {
+            "id": "0001-0001-child",
+            "internalName": "Child",
+            "reference": "LR1-01-02",
+            "type": "CHILD"
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+
+
+```json
+[
+  {
     "id": "0001", # unique to supplier (required) (unique to supplier)
     "internalName": "Museum Tour With Lunch And Something", # (required)
     "reference": "LR1",

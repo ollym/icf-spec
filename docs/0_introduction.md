@@ -4,8 +4,16 @@
 We support the ICF v1 spec, we want to connect.
 
 > Supplier:
-Please use this endpoint: api.my-booking-platform.com
-And credentials user: expedia, pass: h7Jh8sFm2fS
+Please use this endpoint:
+
+"https://expedia:h7Jh8sFm2fS@api.my-booking-platform.com"
+
+Endpoint: api.my-booking-platform.com
+API Key:  j724i9jsdjjdash7Jh8sFm2fS
+
+Endpoint: ____________
+Username: ____________
+Password: ____________
 
 > Reseller:
 Great, i've got a list of suppliers we're mapping those now.

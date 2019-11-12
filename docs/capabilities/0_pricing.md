@@ -1,4 +1,58 @@
-GET /icf/pricing/availabilityPricingOverview
+GET /icf/pricing/pricingOverview
+  ?localDateStart=2019-01-01
+  &localDateEnd=2019-01-31
+  &supplierId=X
+  &productId=Y
+  &optionId=Y
+  &currency=USD
+
+```json
+[
+  {
+    "id": "xxxxxxxxxxxxxxxxxxxx",
+    "localStartDateTime": "2019-01-01T11:30:00", # (required)
+    "localEndDateTime": "2019-01-01T13:30:00", # (required)
+    "currency": "USD",
+    "unitPricing": [
+      {
+        "unitId": "xxxxxx",
+        "retail": "10.00",
+        "minimum": "8.00",
+        "net": "5.00"
+      },
+      {
+        "unitId": "yyyyyy",
+        "retail": "15.00",
+        "minimum": "13.00",
+        "net": "10.00"
+      }
+    ]
+  },
+  {
+    "id": "xxxxxxxxxxxxxxxxxxxx",
+    "localStartDateTime": "2019-01-01T11:30:00", # (required)
+    "localEndDateTime": "2019-01-01T13:30:00", # (required)
+    "unitPricing": [
+      {
+        "unitId": "xxxxxx",
+        "retail": "10.00",
+        "minimum": "8.00",
+        "net": "5.00"
+      },
+      {
+        "unitId": "yyyyyy",
+        "retail": "15.00",
+        "minimum": "13.00",
+        "net": "10.00"
+      }
+    ]
+  }
+]
+```
+
+id: /icf/dynamic-pricing
+
+GET /icf/dynamic-pricing/availabilityOverview
   ?localDateStart=2019-01-01
   &localDateEnd=2019-01-31
   &supplierId=X

@@ -9,7 +9,7 @@ GET /suppliers
   {
     "id": "0001",
     "name": "Big Bus Tours",
-    "endpoint": "https://api.my-booking-platform.com/v1", # (required)
+    "endpoint": "https://bigbus.my-booking-platform.com", # (required)
     "contact": {
       "website": "www.bigbustours.com",
       "email": "info@bigbustours.com",
